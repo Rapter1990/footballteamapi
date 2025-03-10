@@ -1,0 +1,19 @@
+server:
+  port: 3112
+
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  datasource:
+    url: jdbc:postgresql://${FOOTBALL_TEAM_DB_IP:localhost}:${FOOTBALL_TEAM_DB_PORT:5432}/footballteamdatabase
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:111111}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  application:
+    name: footballteamapi
+
