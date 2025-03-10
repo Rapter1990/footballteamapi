@@ -2,6 +2,8 @@ package com.example.footballteamapi.common.infrastructure.adapter;
 
 import com.example.footballteamapi.auth.domain.exception.*;
 import com.example.footballteamapi.common.domain.model.CustomError;
+import com.example.footballteamapi.footballteam.domain.exception.footballteam.FootballTeamAlreadyExistException;
+import com.example.footballteamapi.footballteam.domain.exception.footballteam.FootballTeamNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
@@ -181,6 +183,32 @@ public class GlobalExceptionHandler {
                 .build();
 
         return new ResponseEntity<>(customError, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(FootballTeamAlreadyExistException.class)
+    protected ResponseEntity<CustomError> handleFootballTeamAlreadyExistException(final FootballTeamAlreadyExistException ex) {
+        CustomError error = CustomError.builder()
+                .httpStatus(FootballTeamAlreadyExistException.STATUS)
+                .header(CustomError.Header.ALREADY_EXIST.getName())
+                .message(ex.getMessage())
+                .isSuccess(false)
+                .build();
+
+        return new ResponseEntity<>(error, FootballTeamAlreadyExistException.STATUS);
+
+    }
+
+    @ExceptionHandler(FootballTeamNotFoundException.class)
+    protected ResponseEntity<CustomError> handleFootballTeamNotFoundException(final FootballTeamNotFoundException ex) {
+
+        CustomError error = CustomError.builder()
+                .httpStatus(FootballTeamNotFoundException.STATUS)
+                .header(CustomError.Header.NOT_FOUND.getName())
+                .message(ex.getMessage())
+                .isSuccess(false)
+                .build();
+
+        return new ResponseEntity<>(error, FootballTeamNotFoundException.STATUS);
     }
 
 }
