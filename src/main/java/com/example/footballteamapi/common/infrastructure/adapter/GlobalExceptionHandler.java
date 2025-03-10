@@ -4,6 +4,9 @@ import com.example.footballteamapi.auth.domain.exception.*;
 import com.example.footballteamapi.common.domain.model.CustomError;
 import com.example.footballteamapi.footballteam.domain.exception.footballteam.FootballTeamAlreadyExistException;
 import com.example.footballteamapi.footballteam.domain.exception.footballteam.FootballTeamNotFoundException;
+import com.example.footballteamapi.footballteam.domain.exception.player.MaxPlayersExceededException;
+import com.example.footballteamapi.footballteam.domain.exception.player.PlayerNotFoundException;
+import com.example.footballteamapi.footballteam.domain.exception.player.PlayerTeamMismatchException;
 import jakarta.validation.ConstraintViolationException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
@@ -209,6 +212,48 @@ public class GlobalExceptionHandler {
                 .build();
 
         return new ResponseEntity<>(error, FootballTeamNotFoundException.STATUS);
+    }
+
+    @ExceptionHandler(MaxPlayersExceededException.class)
+    protected ResponseEntity<CustomError> handleMaxPlayersExceededException(final MaxPlayersExceededException ex) {
+
+        CustomError error = CustomError.builder()
+                .httpStatus(MaxPlayersExceededException.STATUS)
+                .header(CustomError.Header.VALIDATION_ERROR.getName())
+                .message(ex.getMessage())
+                .isSuccess(false)
+                .build();
+
+        return new ResponseEntity<>(error, MaxPlayersExceededException.STATUS);
+
+    }
+
+    @ExceptionHandler(PlayerNotFoundException.class)
+    protected ResponseEntity<CustomError> handlePlayerNotFoundException(final PlayerNotFoundException ex) {
+
+        CustomError error = CustomError.builder()
+                .httpStatus(PlayerNotFoundException.STATUS)
+                .header(CustomError.Header.NOT_FOUND.getName())
+                .message(ex.getMessage())
+                .isSuccess(false)
+                .build();
+
+        return new ResponseEntity<>(error, PlayerNotFoundException.STATUS);
+
+    }
+
+    @ExceptionHandler(PlayerTeamMismatchException.class)
+    protected ResponseEntity<CustomError> handlePlayerTeamMismatchException(final PlayerTeamMismatchException ex) {
+
+        CustomError error = CustomError.builder()
+                .httpStatus(PlayerTeamMismatchException.STATUS)
+                .header(CustomError.Header.VALIDATION_ERROR.getName())
+                .message(ex.getMessage())
+                .isSuccess(false)
+                .build();
+
+        return new ResponseEntity<>(error, PlayerTeamMismatchException.STATUS);
+
     }
 
 }
