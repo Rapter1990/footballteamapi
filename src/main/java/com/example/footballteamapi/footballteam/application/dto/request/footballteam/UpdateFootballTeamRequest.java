@@ -1,4 +1,8 @@
 package com.example.footballteamapi.footballteam.application.dto.request.footballteam;
 
-public record UpdateFootballTeamRequest(String teamName) {
-}
+import jakarta.validation.constraints.NotBlank;
+
+public record UpdateFootballTeamRequest(
+        @NotBlank(message = "Team name must not be blank")
+        String teamName
+) {}
