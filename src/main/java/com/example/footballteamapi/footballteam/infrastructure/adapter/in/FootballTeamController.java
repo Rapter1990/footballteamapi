@@ -5,6 +5,7 @@ import com.example.footballteamapi.common.application.dto.response.CustomPagingR
 import com.example.footballteamapi.common.application.dto.response.CustomResponse;
 import com.example.footballteamapi.common.domain.model.CustomPage;
 import com.example.footballteamapi.footballteam.application.dto.request.footballteam.CreateFootballTeamRequest;
+import com.example.footballteamapi.footballteam.application.dto.request.footballteam.FootballTeamPagingRequest;
 import com.example.footballteamapi.footballteam.application.dto.request.footballteam.UpdateFootballTeamRequest;
 import com.example.footballteamapi.footballteam.application.dto.response.FootballTeamResponse;
 import com.example.footballteamapi.footballteam.application.service.FootballTeamService;
@@ -112,7 +113,7 @@ public class FootballTeamController {
     )
     @PostMapping("/teamsList")
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
-    public CustomResponse<CustomPagingResponse<FootballTeamResponse>> getAllTeamsWithPageable(@RequestBody @Valid final CustomPagingRequest request) {
+    public CustomResponse<CustomPagingResponse<FootballTeamResponse>> getAllTeamsWithPageable(@RequestBody @Valid final FootballTeamPagingRequest request) {
         CustomPage<FootballTeam> domainPage = footballTeamService.getAllTeamsWithPageable(request);
         final CustomPagingResponse<FootballTeamResponse> response = customPageFootballTeamToCustomPagingFootballTeamResponseMapper
                 .toPagingResponse(domainPage);
