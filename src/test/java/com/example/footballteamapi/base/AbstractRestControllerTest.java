@@ -5,8 +5,10 @@ import com.example.footballteamapi.auth.domain.model.Token;
 import com.example.footballteamapi.auth.infrastructure.config.TokenConfigurationParameter;
 import com.example.footballteamapi.builder.AdminUserBuilder;
 import com.example.footballteamapi.builder.UserBuilder;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.test.web.servlet.MockMvc;
-import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
-import org.testcontainers.shaded.org.apache.commons.lang3.time.DateUtils;
 
 import java.util.Date;
 import java.util.Map;
