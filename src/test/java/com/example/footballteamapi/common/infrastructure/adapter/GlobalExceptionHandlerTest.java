@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -156,6 +157,28 @@ class GlobalExceptionHandlerTest extends AbstractRestControllerTest {
         checkCustomError(expectedError, actualError);
 
     }
+
+    @Test
+    void givenAuthorizationDeniedException_whenHandleAuthorizationDeniedException_thenRespondWithForbidden() {
+
+        // Given
+        AuthorizationDeniedException ex = new AuthorizationDeniedException("Authorization denied message");
+
+        CustomError expectedError = CustomError.builder()
+                .httpStatus(HttpStatus.FORBIDDEN)
+                .header(CustomError.Header.AUTH_ERROR.getName())
+                .message("Authorization denied message")
+                .build();
+
+        // When
+        ResponseEntity<?> responseEntity = globalExceptionHandler.handleAuthorizationDeniedException(ex);
+
+        // Then
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
+        CustomError actualError = (CustomError) responseEntity.getBody();
+        checkCustomError(expectedError, actualError);
+    }
+
 
     @Test
     void givenPasswordNotValidException_whenHandlePasswordNotValidException_thenRespondWithBadRequest() {

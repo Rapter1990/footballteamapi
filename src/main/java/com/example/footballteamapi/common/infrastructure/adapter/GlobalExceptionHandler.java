@@ -11,6 +11,7 @@ import jakarta.validation.ConstraintViolationException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -96,6 +97,17 @@ public class GlobalExceptionHandler {
                 .httpStatus(HttpStatus.FORBIDDEN)
                 .header(CustomError.Header.AUTH_ERROR.getName())
                 .message(accessDeniedException.getMessage())
+                .build();
+
+        return new ResponseEntity<>(customError, HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(AuthorizationDeniedException.class)
+    protected ResponseEntity<?> handleAuthorizationDeniedException(final AuthorizationDeniedException authorizationDeniedException) {
+        CustomError customError = CustomError.builder()
+                .httpStatus(HttpStatus.FORBIDDEN)
+                .header(CustomError.Header.AUTH_ERROR.getName())
+                .message(authorizationDeniedException.getMessage())
                 .build();
 
         return new ResponseEntity<>(customError, HttpStatus.FORBIDDEN);
