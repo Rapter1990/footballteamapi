@@ -104,7 +104,7 @@ services:
     ports:
       - "3100:3100"
     volumes:
-      - ./data/loki/config/loki-config.yaml:/etc/loki/loki-config.yaml
+      - ./data/loki/config/loki-config.yml.yaml:/etc/loki/loki-config.yml.yaml
     networks:
       - footballteamapi_network
 

@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loki
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: loki
+  template:
+    metadata:
+      labels:
+        app: loki
+    spec:
+      containers:
+        - name: loki
+          image: grafana/loki:latest
+          ports:
+            - containerPort: 3100
+          volumeMounts:
+            - name: loki-config-volume
+              mountPath: /etc/loki/loki-config.yaml
+              subPath: loki-config.yaml
+      volumes:
+        - name: loki-config-volume
+          configMap:
+            name: loki-config
+            items:
+              - key: loki-config.yaml
+                path: loki-config.yaml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: loki-service
+  namespace: default
+spec:
+  selector:
+    app: loki
+  ports:
+    - protocol: TCP
+      port: 3100
+      targetPort: 3100
+  type: ClusterIP

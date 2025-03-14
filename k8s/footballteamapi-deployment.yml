@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: footballteamapi
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: footballteamapi
+  template:
+    metadata:
+      labels:
+        app: footballteamapi
+    spec:
+      containers:
+        - name: footballteamapi
+          image: noyandocker/footballteamapi:latest
+          ports:
+            - containerPort: 3112
+          envFrom:
+            - configMapRef:
+                name: footballteamapi-config
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: footballteamapi-service
+  namespace: default
+spec:
+  selector:
+    app: footballteamapi
+  ports:
+    - protocol: TCP
+      port: 3112
+      targetPort: 3112
+  type: NodePort

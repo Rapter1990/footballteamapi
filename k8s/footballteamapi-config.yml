@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: footballteamapi-config
+  namespace: default
+data:
+  server.port: "3112"
+  FOOTBALL_TEAM_DB_IP: "postgres.default.svc.cluster.local"
+  FOOTBALL_TEAM_DB_PORT: "5432"
+  JAVA_OPTS: "-Dname=footballteamapi"
