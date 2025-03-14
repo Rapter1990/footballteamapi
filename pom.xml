@@ -40,7 +40,7 @@
 		<springdoc-openapi.version>2.8.4</springdoc-openapi.version>
 
 		<sonar.host.url>http://localhost:9000</sonar.host.url>  <!-- Changed to localhost if running locally -->
-		<sonar.login>sqp_a51c2dd9c8648b816faa5bc24684728f75ae13a0</sonar.login> <!-- Authentication Token -->
+		<sonar.login>sqp_5f14cf118b022b176abfd56cd0ea827b1da207c0</sonar.login> <!-- Authentication Token -->
 		<sonar.projectKey>footballteamapi</sonar.projectKey>
 		<sonar.projectName>footballteamapi</sonar.projectName>
 		<sonar.projectVersion>1.0</sonar.projectVersion>
