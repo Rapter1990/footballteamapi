@@ -5,6 +5,6 @@ metadata:
   namespace: default
 data:
   SERVER_PORT: "3112"
-  FOOTBALL_TEAM_DB_IP: "postgres.default.svc.cluster.local"
+  FOOTBALL_TEAM_DB_IP: "postgres-0.postgres.default.svc.cluster.local"
   FOOTBALL_TEAM_DB_PORT: "5432"
   JAVA_OPTS: "-Dname=footballteamapi"
