@@ -1,0 +1,1391 @@
+{
+	"info": {
+		"_postman_id": "712b4da7-f2c8-4489-b7cb-0981491c1f33",
+		"name": "Football Team Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33002673"
+	},
+	"item": [
+		{
+			"name": "auth | admiin",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"exampleAdminFirstName\",\r\n    \"lastName\": \"exampleAdminSurName\",\r\n    \"email\": \"exampleAdmin@gmail.com\",\r\n    \"password\": \"exampleAdmin\",\r\n    \"phoneNumber\": \"01234567890\",\r\n    \"userType\" : \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3112/api/v1/authentication/user/register",
+							"host": [
+								"localhost"
+							],
+							"port": "3112",
+							"path": [
+								"api",
+								"v1",
+								"authentication",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the JSON response\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"// Check if the response contains accessToken and refreshToken\r",
+									"if (response.isSuccess && response.response.accessToken && response.response.refreshToken) {\r",
+									"    // Set the tokens as environment variables for admin\r",
+									"    pm.environment.set(\"ADMIN_ACCESS_TOKEN\", response.response.accessToken);\r",
+									"    pm.environment.set(\"ADMIN_REFRESH_TOKEN\", response.response.refreshToken);\r",
+									"    \r",
+									"    console.log(\"Manager Access Token and Refresh Token have been set successfully.\");\r",
+									"} else {\r",
+									"    console.error(\"Failed to extract admin tokens from the response.\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"exampleAdmin@gmail.com\",\r\n    \"password\": \"exampleAdmin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3112/api/v1/authentication/user/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3112",
+							"path": [
+								"api",
+								"v1",
+								"authentication",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the JSON response\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"// Check if the response contains accessToken and refreshToken\r",
+									"if (response.isSuccess && response.response.accessToken && response.response.refreshToken) {\r",
+									"    // Set the new tokens as environment variables\r",
+									"    pm.environment.set(\"ADMIN_ACCESS_TOKEN\", response.response.accessToken);\r",
+									"    pm.environment.set(\"ADMIN_REFRESH_TOKEN\", response.response.refreshToken);\r",
+									"    \r",
+									"    console.log(\"Admin Access Token and Refresh Token have been updated successfully.\");\r",
+									"} else {\r",
+									"    console.error(\"Failed to update admin tokens. Check the response structure or success status.\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\": \"eyJ0eXAiOiJCZWFyZXIiLCJhbGciOiJSUzI1NiJ9.eyJqdGkiOiIyYjcxZjY1YS1jZTMyLTRkYmYtYWMxOS1jYzJiZDNmZTQ4NzEiLCJpc3MiOiJJU1NVRVIiLCJpYXQiOjE3NDExMTc1ODUsImV4cCI6MTc0MTIwMzk4NSwidXNlcklkIjoiMDdiZWE0YzYtMjBkZC00MDJjLWI0YTEtYjk2ZTUzMDQ5MGJjIn0.vOOimsWOJ5b599ZSHKMvbiaIKo6gQryDw8ecaPKaeh-titBj5P8btzCXyukG3c6gkncPEkbGPcVe7z0JJ3QIM7kvSELPxCpQHnrgDqQYQ7HRN-UGqfWDezg3FXn9dsVhZPHMgUVMRbHx2WlCnGsY3co-WImyBCoLj0SyqVIRT2KDqzp10oBWM8c4_D2556eosBIELyZ5W_2VgJFH7V6VV0pLdEBtF-quBRxts06Yhg-5voFM_6T1GlHcHCz4MSUSzkcZPvkYVmUJZ_472Xhs3O_iun8z-YoMYNs7KiY5O01c_ePmWIBR_cFSO6SyN_baPUE9FEUgwbP5CcUWUpWzww\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3112/api/v1/authentication/user/refresh-token",
+							"host": [
+								"localhost"
+							],
+							"port": "3112",
+							"path": [
+								"api",
+								"v1",
+								"authentication",
+								"user",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response\r",
+									"if (pm.response.code === 200) {\r",
+									"    const response = pm.response.json();\r",
+									"    \r",
+									"    // Check if the response is successful\r",
+									"    if (response.isSuccess) {\r",
+									"        // Set MANAGER_ACCESS_TOKEN and MANAGER_REFRESH_TOKEN to empty strings in the environment\r",
+									"        pm.environment.set(\"ADMIN_ACCESS_TOKEN\", \"\");\r",
+									"        pm.environment.set(\"ADMIN_REFRESH_TOKEN\", \"\");\r",
+									"        console.log(\"Tokens cleared successfully.\");\r",
+									"    } else {\r",
+									"        console.log(\"Logout was not successful, tokens not cleared.\");\r",
+									"    }\r",
+									"} else {\r",
+									"    console.log(\"Request failed, tokens not cleared.\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accessToken\": \"eyJ0eXAiOiJCZWFyZXIiLCJhbGciOiJSUzI1NiJ9.eyJqdGkiOiJhMjU4MmVjNy05MGJjLTRjZGEtOWExMy1mNWUyNDBiMGZhMDgiLCJpc3MiOiJJU1NVRVIiLCJpYXQiOjE3NDExMjEzNDksImV4cCI6MTc0MTEyMzE0OSwidXNlclN0YXR1cyI6IkFDVElWRSIsImpvYkpvaW5pbmdEYXRlIjoiMjAxOS0wMy0wNCIsInVzZXJMYXN0TmFtZSI6ImV4YW1wbGVNYW5hZ2VyU3VyTmFtZSIsInVzZXJQaG9uZU51bWJlciI6IjAxMjM0NTY3ODkwIiwidXNlckVtYWlsIjoiZXhhbXBsZU1hbmFnZXJAZ21haWwuY29tIiwidXNlclR5cGUiOiJNQU5BR0VSIiwidXNlckZpcnN0TmFtZSI6ImV4YW1wbGVNYW5hZ2VyRmlyc3ROYW1lIiwidXNlcklkIjoiNjVhZmJmY2MtYzBlZC00NDI4LWIxYWYtMWYzNTVjMDBiZmViIn0.Bl41eMVtDr7G0xtKEBXnP3B1rm84wp13aONMINB9UXoRa9MZNVlX1HwsD4aLSF8x3ijsd_LuI16aultnAMFdUtJX898wAfbbRvLaIQlU6fTIKgGGbr0tKsr6Rjbt9pIXDeECrH8xmveo5f5PRNZfqd6INMBm6agQNyUWzOWlTAfV21oSQSqkhEoGo3hCGBK3c2L_F2HArs6G7Mmfp3UfiYnx4JFrpmho1ti9rmYzuHbkfE3AILvTuiY5pcDg9qV_Ne6JLTq_8BUGovAL7CKwIebD2--7PB7Rn37g6mEZ5zmM9aenuh35ngI442JKuajtkPGP3DLlV5Aq_mDqmR2EGQ\",\r\n    \"refreshToken\": \"eyJ0eXAiOiJCZWFyZXIiLCJhbGciOiJSUzI1NiJ9.eyJqdGkiOiIzOTcyOGY4OC00NjUwLTRjNTMtYjExMC0wODI4NGU5NWFhNjEiLCJpc3MiOiJJU1NVRVIiLCJpYXQiOjE3NDExMjEzMzQsImV4cCI6MTc0MTIwNzczNCwidXNlcklkIjoiNjVhZmJmY2MtYzBlZC00NDI4LWIxYWYtMWYzNTVjMDBiZmViIn0.XxGiaaHOy6LayXfxpmKXt4OwaycLPEllZXUTxIyFR5ppKH2Df7Ia8vq-XPeR11ix9x9hvffoZhHKSqwPXcfL02O_3k5rPbMapzbStCGMW0DlYyOhkx6r2l5bT7VcezZkDua1FVttzMJEMptmQM__1ziNASYk5GU9WO-2SGxoyZRq9P56vPmobrEVIbCxbqQL1IiSmrypoAfH1LTIwMe3hujfow2-RAwMrRZZSFwU7kCBnCZkbJSSJZib_7ReJT83bX5BlvcmHri4zx3MGzJwB4LRBolZJpehb1ceG2bpdEaPKcpHh5Mnmi723pD_PBwuW26-8lyBDNbFlrweW_tT_w\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3112/api/v1/authentication/user/logout",
+							"host": [
+								"localhost"
+							],
+							"port": "3112",
+							"path": [
+								"api",
+								"v1",
+								"authentication",
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth | user",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"exampleUserFirstName\",\r\n    \"lastName\": \"exampleUserSurName\",\r\n    \"email\": \"exampleUser@gmail.com\",\r\n    \"password\": \"exampleUser\",\r\n    \"phoneNumber\": \"01234567890\",\r\n    \"userType\" : \"USER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3112/api/v1/authentication/user/register",
+							"host": [
+								"localhost"
+							],
+							"port": "3112",
+							"path": [
+								"api",
+								"v1",
+								"authentication",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the JSON response\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"// Check if the response contains accessToken and refreshToken\r",
+									"if (response.isSuccess && response.response.accessToken && response.response.refreshToken) {\r",
+									"    // Set the tokens as environment variables for user\r",
+									"    pm.environment.set(\"USER_ACCESS_TOKEN\", response.response.accessToken);\r",
+									"    pm.environment.set(\"USER_REFRESH_TOKEN\", response.response.refreshToken);\r",
+									"    \r",
+									"    console.log(\"User Access Token and Refresh Token have been set successfully.\");\r",
+									"} else {\r",
+									"    console.error(\"Failed to extract user tokens from the response.\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"exampleUser@gmail.com\",\r\n    \"password\": \"exampleUser\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3112/api/v1/authentication/user/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3112",
+							"path": [
+								"api",
+								"v1",
+								"authentication",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the JSON response\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"// Check if the response contains accessToken and refreshToken\r",
+									"if (response.isSuccess && response.response.accessToken && response.response.refreshToken) {\r",
+									"    // Set the new tokens as environment variables\r",
+									"    pm.environment.set(\"USER_ACCESS_TOKEN\", response.response.accessToken);\r",
+									"    pm.environment.set(\"USER_REFRESH_TOKEN\", response.response.refreshToken);\r",
+									"    \r",
+									"    console.log(\"User Access Token and Refresh Token have been updated successfully.\");\r",
+									"} else {\r",
+									"    console.error(\"Failed to update User tokens. Check the response structure or success status.\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\": \"eyJ0eXAiOiJCZWFyZXIiLCJhbGciOiJSUzI1NiJ9.eyJqdGkiOiJlMDA0NjU5Ni03MWVlLTQ1NDQtYTZhZi03NTE5ODBmMjhkZjQiLCJpc3MiOiJJU1NVRVIiLCJpYXQiOjE3NDE1OTUyMDcsImV4cCI6MTc0MTY4MTYwNywidXNlcklkIjoiZjNiZTcxNjEtYmIyYi00NWRmLThjZGYtOTY3ZDQwZDlmN2NlIn0.lstGWvaJJvxmd1MCIfWiPcjIqqKCDEz-9mMQSXBt2hb_88Wq3x468x604l4brYwcOSTAq9ziHoucGARmuRDiMJSFC3YwFF05c66YXvaoRMv-j6x2p9CwU6bjn0OZ1ZbKlqvlFAo8JhbeEke_GriEDrBb4mOr-MxBxgNmRMq8SXxr8aeSvuZG8_MnHNsJk_6Ag_7dN0V6jfWHkavXdNFXGoG6We9GEA1zrji0brkIDWq7FauZArwnaRMvFXPeaxdd-zwcK4gISlTsztB315Eyg7OSwBeYr85VXh1Q-Y8rkFfwNTgp2e45wJLwQwaiTnNZAfvfvUTBk6VBHtQm6qc86A\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3112/api/v1/authentication/user/refresh-token",
+							"host": [
+								"localhost"
+							],
+							"port": "3112",
+							"path": [
+								"api",
+								"v1",
+								"authentication",
+								"user",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response\r",
+									"if (pm.response.code === 200) {\r",
+									"    const response = pm.response.json();\r",
+									"    \r",
+									"    // Check if the response is successful\r",
+									"    if (response.isSuccess) {\r",
+									"        // Set USER_ACCESS_TOKEN and USER_REFRESH_TOKEN to empty strings in the environment\r",
+									"        pm.environment.set(\"USER_ACCESS_TOKEN\", \"\");\r",
+									"        pm.environment.set(\"USER_REFRESH_TOKEN\", \"\");\r",
+									"        console.log(\"Tokens cleared successfully.\");\r",
+									"    } else {\r",
+									"        console.log(\"Logout was not successful, tokens not cleared.\");\r",
+									"    }\r",
+									"} else {\r",
+									"    console.log(\"Request failed, tokens not cleared.\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accessToken\": \"eyJ0eXAiOiJCZWFyZXIiLCJhbGciOiJSUzI1NiJ9.eyJqdGkiOiI4MTkzZjQ0Yi1jY2UyLTRiZWQtYmU4Yi03YzVjMGNmNTAxOGQiLCJpc3MiOiJJU1NVRVIiLCJpYXQiOjE3NDE1OTUyMTksImV4cCI6MTc0MTU5NzAxOSwidXNlclN0YXR1cyI6IkFDVElWRSIsInVzZXJMYXN0TmFtZSI6ImV4YW1wbGVVc2VyU3VyTmFtZSIsInVzZXJQaG9uZU51bWJlciI6IjAxMjM0NTY3ODkwIiwidXNlckVtYWlsIjoiZXhhbXBsZVVzZXJAZ21haWwuY29tIiwidXNlclR5cGUiOiJVU0VSIiwidXNlckZpcnN0TmFtZSI6ImV4YW1wbGVVc2VyRmlyc3ROYW1lIiwidXNlcklkIjoiZjNiZTcxNjEtYmIyYi00NWRmLThjZGYtOTY3ZDQwZDlmN2NlIn0.tjWF96FPtfV_9jO_cGp2QF8fGZlibxcdXhvSZpwdP5wCETsrJXDPUO0ccp3IyJlWwHmsxvgoZCDdWWmE4VdSe3HwMItcQTwPTYghZdZZrUeq9hymKaJGZGMKUEFx0lgxLPQTYb2YAQy3KR1kjCEIDTyFmMyX6IiEtOGHwc-iH5AJn7Duh-3ZC1Zed60y_c71-OPzFMnOAiL8T42jlgtcLsY9oeHuy2Tq2eSFujM8ZfRm2v7XNCsetTRqpyGSNYVsNNp2G7DU_6QlDOQEDMZBSH01oTOgrgrTP2PZXS8EMbikIeJu_yI7kINxnZ4akVuAcxMtqmXuLjHgcaf38KrzqA\",\r\n    \"refreshToken\": \"eyJ0eXAiOiJCZWFyZXIiLCJhbGciOiJSUzI1NiJ9.eyJqdGkiOiJlMDA0NjU5Ni03MWVlLTQ1NDQtYTZhZi03NTE5ODBmMjhkZjQiLCJpc3MiOiJJU1NVRVIiLCJpYXQiOjE3NDE1OTUyMDcsImV4cCI6MTc0MTY4MTYwNywidXNlcklkIjoiZjNiZTcxNjEtYmIyYi00NWRmLThjZGYtOTY3ZDQwZDlmN2NlIn0.lstGWvaJJvxmd1MCIfWiPcjIqqKCDEz-9mMQSXBt2hb_88Wq3x468x604l4brYwcOSTAq9ziHoucGARmuRDiMJSFC3YwFF05c66YXvaoRMv-j6x2p9CwU6bjn0OZ1ZbKlqvlFAo8JhbeEke_GriEDrBb4mOr-MxBxgNmRMq8SXxr8aeSvuZG8_MnHNsJk_6Ag_7dN0V6jfWHkavXdNFXGoG6We9GEA1zrji0brkIDWq7FauZArwnaRMvFXPeaxdd-zwcK4gISlTsztB315Eyg7OSwBeYr85VXh1Q-Y8rkFfwNTgp2e45wJLwQwaiTnNZAfvfvUTBk6VBHtQm6qc86A\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3112/api/v1/authentication/user/logout",
+							"host": [
+								"localhost"
+							],
+							"port": "3112",
+							"path": [
+								"api",
+								"v1",
+								"authentication",
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "football team",
+			"item": [
+				{
+					"name": "admin",
+					"item": [
+						{
+							"name": "football-team",
+							"item": [
+								{
+									"name": "Create football team",
+									"item": [
+										{
+											"name": "Create Football Team",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{ADMIN_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"teamName\" : \"Football Team Name 1\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:3112/api/v1/football-teams",
+													"host": [
+														"localhost"
+													],
+													"port": "3112",
+													"path": [
+														"api",
+														"v1",
+														"football-teams"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Create Football Team Already Exists Exception",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{ADMIN_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"teamName\" : \"Football Team Name 1\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:3112/api/v1/football-teams",
+													"host": [
+														"localhost"
+													],
+													"port": "3112",
+													"path": [
+														"api",
+														"v1",
+														"football-teams"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Get Team By Id",
+									"item": [
+										{
+											"name": "Get Team by Existing Id",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{ADMIN_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:3112/api/v1/football-teams/:id",
+													"host": [
+														"localhost"
+													],
+													"port": "3112",
+													"path": [
+														"api",
+														"v1",
+														"football-teams",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "ffac22e5-c28d-47a0-bd63-4d4b91d03d5e"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get Team by Non Existing Id",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{ADMIN_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:3112/api/v1/football-teams/:id",
+													"host": [
+														"localhost"
+													],
+													"port": "3112",
+													"path": [
+														"api",
+														"v1",
+														"football-teams",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "aaad50ab-a33f-4d9f-ad07-985900452881"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Get Teams With Pagination",
+									"item": [
+										{
+											"name": "Get Teams With Pagination",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{ADMIN_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"pagination\": {\r\n    \"pageNumber\": 1,\r\n    \"pageSize\": 5\r\n  }\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:3112/api/v1/football-teams/teamsList",
+													"host": [
+														"localhost"
+													],
+													"port": "3112",
+													"path": [
+														"api",
+														"v1",
+														"football-teams",
+														"teamsList"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Update Team By Id",
+									"item": [
+										{
+											"name": "Update Team by Existing Id",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{ADMIN_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"teamName\" : \"Football Team Name 1 Updated\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:3112/api/v1/football-teams/:id",
+													"host": [
+														"localhost"
+													],
+													"port": "3112",
+													"path": [
+														"api",
+														"v1",
+														"football-teams",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "aaad50ab-a33f-4d9f-ad07-985900452884"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Update Team by Non Existing Id",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{ADMIN_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"teamName\" : \"Football Team Name 1 Updated\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:3112/api/v1/football-teams/:id",
+													"host": [
+														"localhost"
+													],
+													"port": "3112",
+													"path": [
+														"api",
+														"v1",
+														"football-teams",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "aaad50ab-a33f-4d9f-ad07-985900452881"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Delete Team By Id",
+									"item": [
+										{
+											"name": "Delete Team by Existing Id",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{ADMIN_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "localhost:3112/api/v1/football-teams/:id",
+													"host": [
+														"localhost"
+													],
+													"port": "3112",
+													"path": [
+														"api",
+														"v1",
+														"football-teams",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "aaad50ab-a33f-4d9f-ad07-985900452884"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Delete Team by Non Existing Id",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{ADMIN_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "localhost:3112/api/v1/football-teams/:id",
+													"host": [
+														"localhost"
+													],
+													"port": "3112",
+													"path": [
+														"api",
+														"v1",
+														"football-teams",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "aaad50ab-a33f-4d9f-ad07-985900452880"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "player",
+							"item": [
+								{
+									"name": "Add Player to Team",
+									"item": [
+										{
+											"name": "Add Local Player to Team",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{ADMIN_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"name\": \"Local Football Player Name\",\r\n  \"foreignPlayer\": false,\r\n  \"position\": \"MIDFIELDER\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:3112/api/v1/football-teams/:teamId/players",
+													"host": [
+														"localhost"
+													],
+													"port": "3112",
+													"path": [
+														"api",
+														"v1",
+														"football-teams",
+														":teamId",
+														"players"
+													],
+													"variable": [
+														{
+															"key": "teamId",
+															"value": "ffac22e5-c28d-47a0-bd63-4d4b91d03d5e"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Add Foreign Player to Team",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{ADMIN_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"name\": \"Foreign Football Player Name\",\r\n  \"foreignPlayer\": true,\r\n  \"position\": \"MIDFIELDER\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:3112/api/v1/football-teams/:teamId/players",
+													"host": [
+														"localhost"
+													],
+													"port": "3112",
+													"path": [
+														"api",
+														"v1",
+														"football-teams",
+														":teamId",
+														"players"
+													],
+													"variable": [
+														{
+															"key": "teamId",
+															"value": "ffac22e5-c28d-47a0-bd63-4d4b91d03d5e"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Add Another Foreign Player to Team",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{ADMIN_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"name\": \"Second Foreign Football Player Name\",\r\n  \"foreignPlayer\": true,\r\n  \"position\": \"MIDFIELDER\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:3112/api/v1/football-teams/:teamId/players",
+													"host": [
+														"localhost"
+													],
+													"port": "3112",
+													"path": [
+														"api",
+														"v1",
+														"football-teams",
+														":teamId",
+														"players"
+													],
+													"variable": [
+														{
+															"key": "teamId",
+															"value": "ffac22e5-c28d-47a0-bd63-4d4b91d03d5e"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Update Player",
+									"item": [
+										{
+											"name": "Update Local Player Info",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{ADMIN_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"name\": \"Local Football Player Name Updated\",\r\n  \"foreignPlayer\": true,\r\n  \"position\": \"DEFENDER\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:3112/api/v1/football-teams/:teamId/players/:playerId",
+													"host": [
+														"localhost"
+													],
+													"port": "3112",
+													"path": [
+														"api",
+														"v1",
+														"football-teams",
+														":teamId",
+														"players",
+														":playerId"
+													],
+													"variable": [
+														{
+															"key": "teamId",
+															"value": "ffac22e5-c28d-47a0-bd63-4d4b91d03d5e"
+														},
+														{
+															"key": "playerId",
+															"value": "dc0fe2c7-47d8-47c0-b2eb-4177d94d0222"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Update Foreign Player Info Copy",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{ADMIN_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"name\": \"Foreign Football Player Name Updated\",\r\n  \"foreignPlayer\": true,\r\n  \"position\": \"DEFENDER\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:3112/api/v1/football-teams/:teamId/players/:playerId",
+													"host": [
+														"localhost"
+													],
+													"port": "3112",
+													"path": [
+														"api",
+														"v1",
+														"football-teams",
+														":teamId",
+														"players",
+														":playerId"
+													],
+													"variable": [
+														{
+															"key": "teamId",
+															"value": "ffac22e5-c28d-47a0-bd63-4d4b91d03d5e"
+														},
+														{
+															"key": "playerId",
+															"value": "4a2a9914-bc48-4ba1-b1a3-45083e6ef255"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Delete Player",
+									"item": [
+										{
+											"name": "Delete Player",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{ADMIN_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "localhost:3112/api/v1/football-teams/:teamId/players/:playerId",
+													"host": [
+														"localhost"
+													],
+													"port": "3112",
+													"path": [
+														"api",
+														"v1",
+														"football-teams",
+														":teamId",
+														"players",
+														":playerId"
+													],
+													"variable": [
+														{
+															"key": "teamId",
+															"value": "ffac22e5-c28d-47a0-bd63-4d4b91d03d5e"
+														},
+														{
+															"key": "playerId",
+															"value": "fc3d2748-89ff-408d-b0ce-2b11e83f4e60"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "List Players By Team with pagination",
+									"item": [
+										{
+											"name": "List Players with pagination",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{ADMIN_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"pagination\": {\r\n    \"pageNumber\": 1,\r\n    \"pageSize\": 5\r\n  }\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:3112/api/v1/football-teams/:teamId/players",
+													"host": [
+														"localhost"
+													],
+													"port": "3112",
+													"path": [
+														"api",
+														"v1",
+														"football-teams",
+														":teamId",
+														"players"
+													],
+													"variable": [
+														{
+															"key": "teamId",
+															"value": "ffac22e5-c28d-47a0-bd63-4d4b91d03d5e"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "football-team",
+							"item": [
+								{
+									"name": "Get Team By Id",
+									"item": [
+										{
+											"name": "Get Team by Existing Id",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{USER_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:3112/api/v1/football-teams/:id",
+													"host": [
+														"localhost"
+													],
+													"port": "3112",
+													"path": [
+														"api",
+														"v1",
+														"football-teams",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "ffac22e5-c28d-47a0-bd63-4d4b91d03d5e"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Get Team by Non Existing Id",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{USER_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "localhost:3112/api/v1/football-teams/:id",
+													"host": [
+														"localhost"
+													],
+													"port": "3112",
+													"path": [
+														"api",
+														"v1",
+														"football-teams",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "aaad50ab-a33f-4d9f-ad07-985900452881"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Get Teams With Pagination",
+									"item": [
+										{
+											"name": "Get Teams With Pagination",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{USER_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"pagination\": {\r\n    \"pageNumber\": 1,\r\n    \"pageSize\": 5\r\n  }\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:3112/api/v1/football-teams/teamsList",
+													"host": [
+														"localhost"
+													],
+													"port": "3112",
+													"path": [
+														"api",
+														"v1",
+														"football-teams",
+														"teamsList"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "player",
+							"item": [
+								{
+									"name": "List Players By Team with pagination",
+									"item": [
+										{
+											"name": "List Players with pagination",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{USER_ACCESS_TOKEN}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"pagination\": {\r\n    \"pageNumber\": 1,\r\n    \"pageSize\": 5\r\n  }\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:3112/api/v1/football-teams/:teamId/players",
+													"host": [
+														"localhost"
+													],
+													"port": "3112",
+													"path": [
+														"api",
+														"v1",
+														"football-teams",
+														":teamId",
+														"players"
+													],
+													"variable": [
+														{
+															"key": "teamId",
+															"value": "ffac22e5-c28d-47a0-bd63-4d4b91d03d5e"
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
