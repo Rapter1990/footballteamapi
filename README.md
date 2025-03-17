@@ -8,24 +8,24 @@
 
 <ul style="list-style-type:disc">
    <li>
-      <b>Soccer Team Management Service:</b>
+      <b>Football Team Management Service:</b>
       <ul>
          <li>
-            Implement a Spring Boot-based service through hexagonal architecture for managing soccer teams and their associated players, encompassing functionalities for team listing, player retrieval by team ID, and support for team and player updates or deletions
+            Implement a Spring Boot-based service through hexagonal architecture for managing football teams and their associated players, encompassing functionalities for team listing, player retrieval by team ID, and support for team and player updates or deletions
          </li>
          <li>
             <b>Functional Features:</b>
             <ul>
-               <li>List all soccer teams.</li>
-               <li>List players of a selected soccer team using the team’s ID.</li>
-               <li>Delete or update a soccer team using its ID.</li>
-               <li>Delete players from a soccer team or add a new player to the team.</li>
+               <li>List all football teams.</li>
+               <li>List players of a selected football team using the team’s ID.</li>
+               <li>Delete or update a football team using its ID.</li>
+               <li>Delete players from a football team or add a new player to the team.</li>
             </ul>
          </li>
          <li>
             <b>Business Rules:</b>
             <ul>
-               <li>A soccer team can have a maximum of 18 players.</li>
+               <li>A football team can have a maximum of 18 players.</li>
                <li>Only up to 6 players on a team can be foreigners.</li>
                <li>A maximum of 2 goalkeepers can be defined per team.</li>
             </ul>
