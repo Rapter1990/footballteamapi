@@ -353,7 +353,91 @@ https://hub.docker.com/repository/docker/noyandocker/footballteamapi/general
 <details>
 <summary>Click here to show the screenshots of project</summary>
     <p> Figure 1 </p>
-    <img src ="screenshots/1.PNG">
+    <img src ="screenshots/swagger.PNG">
+    <p> Figure 2 </p>
+    <img src ="screenshots/jacoco_test_report.PNG">
+    <p> Figure 3 </p>
+    <img src ="screenshots/docker_main.PNG">
+    <p> Figure 4 </p>
+    <img src ="screenshots/docker_prometheus_1.PNG">
+    <p> Figure 5 </p>
+    <img src ="screenshots/docker_grafana_prometheus_1.PNG">
+    <p> Figure 6 </p>
+    <img src ="screenshots/docker_grafana_prometheus_2.PNG">
+    <p> Figure 7 </p>
+    <img src ="screenshots/docker_grafana_jvm_1.PNG">
+    <p> Figure 8 </p>
+    <img src ="screenshots/docker_grafana_jvm_2.PNG">
+    <p> Figure 9 </p>
+    <img src ="screenshots/docker_loki_1.PNG">
+    <p> Figure 10 </p>
+    <img src ="screenshots/docker_loki_2.PNG">
+    <p> Figure 11 </p>
+    <img src ="screenshots/docker_grafana_loki_1.PNG">
+    <p> Figure 12 </p>
+    <img src ="screenshots/docker_grafana_loki_2.PNG">
+    <p> Figure 13 </p>
+    <img src ="screenshots/docker_grafana_loki_3.PNG">
+    <p> Figure 14 </p>
+    <img src ="screenshots/docker_grafana_loki_4.PNG">
+    <p> Figure 15 </p>
+    <img src ="screenshots/docker_sonarqube_1.PNG">
+    <p> Figure 16 </p>
+    <img src ="screenshots/docker_sonarqube_2.PNG">
+    <p> Figure 17 </p>
+    <img src ="screenshots/docker_sonarqube_3.PNG">
+    <p> Figure 18 </p>
+    <img src ="screenshots/docker_sonarqube_4.PNG">
+    <p> Figure 19 </p>
+    <img src ="screenshots/docker_sonarqube_5.PNG">
+    <p> Figure 20 </p>
+    <img src ="screenshots/docker_sonarqube_6.PNG">
+    <p> Figure 21 </p>
+    <img src ="screenshots/docker_sonarqube_7.PNG">
+    <p> Figure 22 </p>
+    <img src ="screenshots/docker_sonarqube_8.PNG">
+    <p> Figure 23 </p>
+    <img src ="screenshots/docker_sonarqube_9.PNG">
+    <p> Figure 24 </p>
+    <img src ="screenshots/docker_sonarqube_10.PNG">
+    <p> Figure 25 </p>
+    <img src ="screenshots/minikube_kubernetes_1.PNG">
+    <p> Figure 26 </p>
+    <img src ="screenshots/minikube_kubernetes_prometheus_1.PNG">
+    <p> Figure 27 </p>
+    <img src ="screenshots/minikube_kubernetes_grafana_1.PNG">
+    <p> Figure 28 </p>
+    <img src ="screenshots/minikube_kubernetes_grafana_2.PNG">
+    <p> Figure 29 </p>
+    <img src ="screenshots/minikube_kubernetes_grafana_3.PNG">
+    <p> Figure 30 </p>
+    <img src ="screenshots/minikube_kubernetes_grafana_4.PNG">
+    <p> Figure 31 </p>
+    <img src ="screenshots/minikube_kubernetes_grafana_5.PNG">
+    <p> Figure 32 </p>
+    <img src ="screenshots/minikube_kubernetes_grafana_6.PNG">
+    <p> Figure 33 </p>
+    <img src ="screenshots/minikube_kubernetes_grafana_7.PNG">
+    <p> Figure 34 </p>
+    <img src ="screenshots/minikube_kubernetes_grafana_8.PNG">
+    <p> Figure 35 </p>
+    <img src ="screenshots/minikube_sonarqube_1.PNG">
+    <p> Figure 36 </p>
+    <img src ="screenshots/minikube_sonarqube_2.PNG">
+    <p> Figure 37 </p>
+    <img src ="screenshots/minikube_sonarqube_3.PNG">
+    <p> Figure 38 </p>
+    <img src ="screenshots/minikube_sonarqube_4.PNG">
+    <p> Figure 39 </p>
+    <img src ="screenshots/minikube_sonarqube_5.PNG">
+    <p> Figure 40 </p>
+    <img src ="screenshots/minikube_sonarqube_6.PNG">
+    <p> Figure 41 </p>
+    <img src ="screenshots/minikube_sonarqube_7.PNG">
+    <p> Figure 42 </p>
+    <img src ="screenshots/minikube_sonarqube_8.PNG">
+    <p> Figure 43 </p>
+    <img src ="screenshots/minikube_sonarqube_9.PNG">
 </details>
 
 
